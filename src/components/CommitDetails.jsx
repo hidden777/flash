@@ -7,16 +7,16 @@ function formatDateToIST(dateString) {
   if (!dateString) return 'N/A';
   try {
     const date = new Date(dateString);
-    const istDate = new Date(date.getTime() + (5.5 * 60 * 60 * 1000)); // Add 5.5 hours for IST
+    // The timestamp is already in IST, so no conversion needed
     
-    return istDate.toLocaleDateString('en-IN', {
+    return date.toLocaleDateString('en-IN', {
       day: 'numeric',
       month: 'long',
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
       hour12: true
-    });
+    }) + ' IST';
   } catch (e) {
     return dateString;
   }

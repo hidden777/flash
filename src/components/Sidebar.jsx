@@ -5,10 +5,14 @@ import BuildCard from './cards/BuildCard';
 
 export default function Sidebar({ builds, selectedId, onSelect, filter, onFilterChange, onBuildStart, onBuildComplete }) {
   const filtered = useMemo(() => {
-    if (filter === 'ALL') return builds;
-    if (filter === 'AI') return builds.filter(b => (b.type || '').toUpperCase().includes('AI'));
-    if (filter === 'NORMAL') return builds.filter(b => !(b.type || '').toUpperCase().includes('AI'));
-    return builds;
+    let result;
+    if (filter === 'ALL') result = builds;
+    else if (filter === 'AI') result = builds.filter(b => (b.type || '').toUpperCase().includes('AI'));
+    else if (filter === 'NORMAL') result = builds.filter(b => !(b.type || '').toUpperCase().includes('AI'));
+    else result = builds;
+    
+    // Reverse the order so newest builds appear at the top
+    return result.slice().reverse();
   }, [builds, filter]);
 
   return (

@@ -16,25 +16,25 @@
         {
         
             "frontend1": {
-                "start_time": "2025-09-21T21:28:072",
-                "end_time": "2025-09-21T21:28:262",
+                "start_time": "2025-09-22T21:28:07Z",
+                "end_time": "2025-09-22T21:28:26Z",
                 "duration_seconds": 20
             },
             "frontend2": {
-                "start_time": "2025-09-21T21:28:072",
-                "end_time": "2025-09-21T21:28:262",
+                "start_time": "2025-09-22T21:28:07Z",
+                "end_time": "2025-09-22T21:28:26Z",
                 "duration_seconds": 20
             }
         }
         ],
         "llm_time": {
-            "start_time": "2025-09-21T21:28:262",
-            "end_time": "2025-09-21T21:28:302",
+            "start_time": "2025-09-22T21:28:26Z",
+            "end_time": "2025-09-22T21:28:30Z",
             "duration_seconds": "4"
         },
         "test_time": {
-            "start_time": "2025-09-21T21:28:302",
-            "end_time": "2025-09-21T21:28:362",
+            "start_time": "2025-09-22T21:28:30Z",
+            "end_time": "2025-09-22T21:28:36Z",
             "duration_seconds": "6"
         },
         "impacted_tests": [ 
@@ -72,35 +72,35 @@
         "build_times": [
         {
             "frontend1": {
-                "start_time": "2025-09-21T21:28:072",
-                "end_time": "2025-09-21T21:28:262",
+                "start_time": "2025-09-22T21:03:13Z",
+                "end_time": "2025-09-22T21:03:33Z",
                 "duration_seconds": 20
             },
             "frontend2": {
-                "start_time": "2025-09-21T21:28:072",
-                "end_time": "2025-09-21T21:28:262",
+                "start_time": "2025-09-22T21:03:13Z",
+                "end_time": "2025-09-22T21:03:33Z",
                 "duration_seconds": 20
             },
             "frontend3": {
-                "start_time": "2025-09-21T21:28:072",
-                "end_time": "2025-09-21T21:28:262",
+                "start_time": "2025-09-22T21:03:13Z",
+                "end_time": "2025-09-22T21:03:33Z",
                 "duration_seconds": 20
             },
             "frontend4": {
-                "start_time": "2025-09-21T21:28:072",
-                "end_time": "2025-09-21T21:28:262",
+                "start_time": "2025-09-22T21:03:13Z",
+                "end_time": "2025-09-22T21:03:33Z",
                 "duration_seconds": 20
             }
         }
         ],
         "llm_time": {
-            "start_time": "2025-09-21T21:28:262",
-            "end_time": "2025-09-21T21:28:302",
+            "start_time": "2025-09-22T21:03:33Z",
+            "end_time": "2025-09-22T21:03:37Z",
             "duration_seconds": "300"
         },
         "test_time": {
-            "start_time": "2025-09-21T21:28:302",
-            "end_time": "2025-09-21T21:28:362",
+            "start_time": "2025-09-22T21:03:37Z",
+            "end_time": "2025-09-22T21:03:43Z",
             "duration_seconds": "6"
         },
         "impacted_tests": [],

@@ -50,41 +50,18 @@ export function formatBuildStartTime(build) {
   if (!startTime) return 'N/A';
   
   try {
-    // Fix the timestamp format - remove extra digits from milliseconds
-    let fixedTime = startTime;
-    if (fixedTime.includes('T') && fixedTime.includes(':')) {
-      // Handle format like "2025-09-21T21:28:072" -> "2025-09-21T21:28:07.200Z"
-      const parts = fixedTime.split('T');
-      if (parts.length === 2) {
-        const timePart = parts[1];
-        const timeParts = timePart.split(':');
-        if (timeParts.length === 3) {
-          const seconds = timeParts[2];
-          if (seconds.length > 2) {
-            // Take only first 2 digits for seconds, rest as milliseconds
-            const secs = seconds.substring(0, 2);
-            const millis = seconds.substring(2).padEnd(3, '0').substring(0, 3);
-            fixedTime = `${parts[0]}T${timeParts[0]}:${timeParts[1]}:${secs}.${millis}Z`;
-          } else {
-            fixedTime = `${parts[0]}T${timePart}Z`;
-          }
-        }
-      }
-    }
-    
-    // Parse the timestamp and convert to IST
-    const date = new Date(fixedTime);
+    // Parse the ISO 8601 timestamp (e.g., "2025-09-21T21:28:07Z")
+    const date = new Date(startTime);
     if (isNaN(date.getTime())) {
       return 'Invalid Date';
     }
     
-    const istDate = new Date(date.getTime() + (5.5 * 60 * 60 * 1000)); // Add 5.5 hours for IST
-    
-    return istDate.toLocaleDateString('en-IN', {
+    // The timestamp is already in IST, so no conversion needed
+    return date.toLocaleDateString('en-IN', {
       day: 'numeric',
       month: 'long',
       year: 'numeric'
-    }) + ' ' + istDate.toLocaleTimeString('en-IN', {
+    }) + ' ' + date.toLocaleTimeString('en-IN', {
       hour: '2-digit',
       minute: '2-digit',
       hour12: true
