@@ -1,0 +1,112 @@
+[
+    {
+        "id": 1758490110,
+        "type": "AI BUILD",
+        "commit": {
+        "hash": "efcfcea225ad29eed0bbf8adf733de5feba9d374",
+        "message": "frontend 1 changes",
+        "author": "K144390",
+        "date": "2025-09-22 02:51:21 +0530"
+        },
+        "changes": {
+            "directories": ["frontend1", "frontend2"],
+            "files": ["frontend1/src/components/HomePage.jsx", "frontend1/src/components/Header.jsx", "frontend2/src/components/HomePage.jsx", "frontend2/src/components/HomePage.test.jsx"]    
+        },
+        "build_times": [
+        {
+        
+            "frontend1": {
+                "start_time": "2025-09-21T21:28:072",
+                "end_time": "2025-09-21T21:28:262",
+                "duration_seconds": 20
+            },
+            "frontend2": {
+                "start_time": "2025-09-21T21:28:072",
+                "end_time": "2025-09-21T21:28:262",
+                "duration_seconds": 20
+            }
+        }
+        ],
+        "llm_time": {
+            "start_time": "2025-09-21T21:28:262",
+            "end_time": "2025-09-21T21:28:302",
+            "duration_seconds": "4"
+        },
+        "test_time": {
+            "start_time": "2025-09-21T21:28:302",
+            "end_time": "2025-09-21T21:28:362",
+            "duration_seconds": "6"
+        },
+        "impacted_tests": [ 
+            { 
+                "file": "C:/Users/K144390/hackathon/demo-monorepo/frontend1/test/HomePage.test.jsx", 
+                "test": "button shows validation errors when fields are empty navigates to|blog on successful form submission", 
+                "explanation": "The change was to the text of the submit button. All tests that interact with the submit button will need to be run."
+            },
+            {
+                "file": "C:/Users/K144390/hackathon/demo-monorepo/frontend1/test/Header.test.jsx",
+                "test": "header shows the correct title",
+                "explanation": "The change was to the text of the header. All tests that interact with the header will need to be run."
+            },
+            {
+                "file": "C:/Users/K144390/hackathon/demo-monorepo/frontend2/test/HomePage.test.jsx",
+                "test": "button shows validation errors when fields are empty navigates to|blog on successful form submission",
+                "explanation": "The change was to the text of the submit button. All tests that interact with the submit button will need to be run."
+            }
+        ],
+        "terminal_logs": "==== Starting build for frontend1 ====\n>> Running npm install\nadded 200 packages...\n>> Running npm nx install\n>> Running nx affected build --parallel\n>> Running nx test frontend1\nPASS frontend1 tests\n==== Finished build for frontend1 ====\n\n==== Starting build for frontend2 ====\n..."
+    },
+    {
+        "id": 1758490220,
+        "type": "NORMAL BUILD",
+        "commit": {
+        "hash": "efcfcea225ad29eed0bbf8adf733de5feba9d374",
+        "message": "frontend 1 changes",
+        "author": "K144390",
+        "date": "2025-09-22 02:51:21 +0530"
+        },
+        "changes": {
+            "directories": ["frontend1", "frontend2"],
+            "files": ["frontend1/src/components/HomePage.jsx", "frontend1/src/components/Header.jsx", "frontend2/src/components/HomePage.jsx", "frontend2/src/components/HomePage.test.jsx"]    
+        },
+        "build_times": [
+        {
+        
+            "frontend1": {
+                "start_time": "2025-09-21T21:28:072",
+                "end_time": "2025-09-21T21:28:262",
+                "duration_seconds": 20
+            },
+            "frontend2": {
+                "start_time": "2025-09-21T21:28:072",
+                "end_time": "2025-09-21T21:28:262",
+                "duration_seconds": 20
+            },
+            "frontend3": {
+                "start_time": "2025-09-21T21:28:072",
+                "end_time": "2025-09-21T21:28:262",
+                "duration_seconds": 20
+            },
+            "frontend4": {
+                "start_time": "2025-09-21T21:28:072",
+                "end_time": "2025-09-21T21:28:262",
+                "duration_seconds": 20
+            }
+        }
+        ],
+        "llm_time": {
+            "start_time": "2025-09-21T21:28:262",
+            "end_time": "2025-09-21T21:28:302",
+            "duration_seconds": "0"
+        },
+        "test_time": {
+            "start_time": "2025-09-21T21:28:302",
+            "end_time": "2025-09-21T21:28:362",
+            "duration_seconds": "6"
+        },
+        "impacted_tests": [],
+        "terminal_logs": "==== Starting build for frontend1 ====\n>> Running npm install\nadded 200 packages...\n>> Running npm nx install\n>> Running nx affected build --parallel\n>> Running nx test frontend1\nPASS frontend1 tests\n==== Finished build for frontend1 ====\n\n==== Starting build for frontend2 ====\n..."
+    }
+]
+
+
