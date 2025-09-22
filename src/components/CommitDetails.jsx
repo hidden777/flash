@@ -59,7 +59,7 @@ export default function CommitDetails({ build }) {
           </Typography>
         </Stack>
         <Typography variant="caption" color="text.secondary">
-          {commit.author} • {formatDateToIST(commit.date)}
+          <span style={{ color: 'grey', fontWeight: 700 }}>{commit.author}</span> • <span style={{ color: 'grey', fontWeight: 400 }}>{formatDateToIST(commit.date)}</span>
         </Typography>
         <Box sx={{ mt: 0.5 }}>
           <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5 }}>Files changed</Typography>

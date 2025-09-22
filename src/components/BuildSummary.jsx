@@ -29,7 +29,7 @@ export default function BuildSummary({ build }) {
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Chip size="small" label={`#${build.id}`} />
           <Chip size="small" color={chipColorForBuild(build)} label={build.type} sx={{ fontWeight: 700 }} />
-          <Chip size="small" color="info" label={formatBuildStartTime(build)} sx={{ fontWeight: 700 }} />
+          <Chip size="small" label={formatBuildStartTime(build)} sx={{ fontWeight: 700, color: '#6a1b9a', backgroundColor: 'rgba(106, 27, 154, 0.1)' }} />
         </Box>
       </Stack>
     </Paper>
