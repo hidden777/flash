@@ -39,8 +39,8 @@ export default function SummaryView({ builds }) {
           <Typography
             variant="h5"
             sx={{
-              m: 0,
-              p: 0,
+              m: 0.5,
+              p: 1,
               fontWeight: 600,
               letterSpacing: 0.2,
               color: '#000'

@@ -1,14 +1,30 @@
 import React, { useState } from 'react';
-import { Box, Button, Snackbar, Alert, Paper } from '@mui/material';
+import { Box, Button, Paper } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRobot, faPlay } from '@fortawesome/free-solid-svg-icons';
 
-export default function Controls() {
-  const [snack, setSnack] = useState({ open: false, message: '', severity: 'info' });
+export default function Controls({ onBuildStart, onBuildComplete }) {
+  const [isBuilding, setIsBuilding] = useState(false);
 
   const trigger = async (type) => {
-    await fetch(`http://localhost:3001/api/run-${type === 'AI Build' ? 'ai' : 'normal'}`), { method: 'POST' }
-    setSnack({ open: true, message: `${type} triggered`, severity: 'success' });
+    setIsBuilding(true);
+    onBuildStart(type);
+     
+    try {
+      // Make actual API call to trigger build
+      await fetch(`http://localhost:3001/api/run-${type === 'AI Build' ? 'ai' : 'normal'}`, { 
+        method: 'POST' 
+      });
+      
+      // Build completed successfully
+      setIsBuilding(false);
+      onBuildComplete(type);
+    } catch (error) {
+      // Handle error case
+      console.error('Build failed:', error);
+      setIsBuilding(false);
+      onBuildComplete(type);
+    }
   };
 
   return (
@@ -26,37 +42,38 @@ export default function Controls() {
           variant="contained"
           color="primary"
           onClick={() => trigger('Normal Build')}
+          disabled={isBuilding}
           sx={{
             textTransform: 'none',
             fontWeight: 700,
             borderRadius: 1.5,
             boxShadow: 2,
-            '&:hover': { boxShadow: 3 }
+            '&:hover': { boxShadow: 3 },
+            '&:disabled': { opacity: 0.6 }
           }}
           startIcon={<FontAwesomeIcon icon={faPlay} />}
         >
-          Normal Build
+          {isBuilding ? 'Building...' : 'Normal Build'}
         </Button>
         <Button
           fullWidth
           variant="contained"
           color="success"
           onClick={() => trigger('AI Build')}
+          disabled={isBuilding}
           sx={{
             textTransform: 'none',
             fontWeight: 700,
             borderRadius: 1.5,
             boxShadow: 2,
-            '&:hover': { boxShadow: 3 }
+            '&:hover': { boxShadow: 3 },
+            '&:disabled': { opacity: 0.6 }
           }}
           startIcon={<FontAwesomeIcon icon={faRobot} />}
         >
-          AI Build
+          {isBuilding ? 'Building...' : 'AI Build'}
         </Button>
       </Box>
-      <Snackbar open={snack.open} autoHideDuration={2500} onClose={() => setSnack(s => ({ ...s, open: false }))}>
-        <Alert severity={snack.severity} sx={{ width: '100%' }}>{snack.message}</Alert>
-      </Snackbar>
     </Paper>
   );
 }

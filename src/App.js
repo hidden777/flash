@@ -12,12 +12,16 @@ import ImpactedTests from './components/ImpactedTests';
 import LogsViewer from './components/LogsViewer';
 import SummaryView from './components/SummaryView';
 import BuildsTable from './components/BuildsTable';
+import BuildStatusNotification from './components/BuildStatusNotification';
+import BuildSuccessAlert from './components/BuildSuccessAlert';
 import { getLogs, buildDonutData, buildBarData } from './utils/logs';
 
 function App() {
   const [builds, setBuilds] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [filter, setFilter] = useState('ALL');
+  const [buildModal, setBuildModal] = useState({ open: false, type: null });
+  const [successAlert, setSuccessAlert] = useState({ open: false, type: null });
 
   useEffect(() => {
     try {
@@ -42,18 +46,43 @@ function App() {
     setSelectedId(prev => (prev === id ? null : id));
   };
 
+  const handleBuildStart = (type) => {
+    setBuildModal({ open: true, type });
+  };
+
+  const handleBuildComplete = (type) => {
+    setBuildModal({ open: false, type: null });
+    setSuccessAlert({ open: true, type });
+  };
+
+  const handleSuccessAlertClose = () => {
+    setSuccessAlert({ open: false, type: null });
+    // Refresh the page to get latest data
+    window.location.reload();
+  };
+
+
   return (
     <Box className="app-shell">
       <HeaderBar />
-      <Box className="app-body">
+      <Box className="app-body"
+        sx={{
+            marginTop: buildModal.open ? '75px' : '0px', // Add space for notification
+            transition: 'margin-top 0.3s ease-out'
+          }}
+      >
         <Sidebar
           builds={builds}
           selectedId={selectedId}
           onSelect={handleSelect}
           filter={filter}
           onFilterChange={setFilter}
+          onBuildStart={handleBuildStart}
+          onBuildComplete={handleBuildComplete}
         />
-        <Box className="app-main">
+        <Box 
+          className="app-main"
+        >
           {!selectedBuild && (
             <>
               <Box sx={{ mt: 0 }}>
@@ -113,6 +142,19 @@ function App() {
           )}
         </Box>
       </Box>
+      
+      {/* Build Status Notification */}
+      <BuildStatusNotification 
+        open={buildModal.open} 
+        buildType={buildModal.type} 
+      />
+      
+      {/* Build Success Alert */}
+      <BuildSuccessAlert
+        open={successAlert.open}
+        buildType={successAlert.type}
+        onClose={handleSuccessAlertClose}
+      />
     </Box>
   );
 }

@@ -3,7 +3,7 @@ import { Box, Chip, Divider, ToggleButton, ToggleButtonGroup, Typography } from 
 import Controls from './Controls';
 import BuildCard from './cards/BuildCard';
 
-export default function Sidebar({ builds, selectedId, onSelect, filter, onFilterChange }) {
+export default function Sidebar({ builds, selectedId, onSelect, filter, onFilterChange, onBuildStart, onBuildComplete }) {
   const filtered = useMemo(() => {
     if (filter === 'ALL') return builds;
     if (filter === 'AI') return builds.filter(b => (b.type || '').toUpperCase().includes('AI'));
@@ -13,7 +13,7 @@ export default function Sidebar({ builds, selectedId, onSelect, filter, onFilter
 
   return (
     <Box sx={{ width: 380, borderRight: '1px solid #eee', height: '100%', overflowY: 'auto', p: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Controls />
+      <Controls onBuildStart={onBuildStart} onBuildComplete={onBuildComplete} />
       <Typography variant="subtitle1" sx={{ mt: 0 }}>Builds</Typography>
       <ToggleButtonGroup
         color="primary"

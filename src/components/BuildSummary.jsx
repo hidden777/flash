@@ -11,7 +11,7 @@ export default function BuildSummary({ build }) {
     <Paper
       variant="outlined"
       sx={{
-        p: 1.5,
+        p: 2.5,
         background: theme => (theme.palette.mode === 'light' ? '#fffdf6' : 'rgba(255,193,7,0.06)'),
         border: '1px solid #e0e0e0',
         borderLeft: '6px solid #ffcd41',
