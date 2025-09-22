@@ -10,7 +10,7 @@ import ImpactedTests from './components/ImpactedTests';
 import LogsViewer from './components/LogsViewer';
 import SummaryView from './components/SummaryView';
 import BuildsTable from './components/BuildsTable';
-import { fetchLogs, buildDonutData, buildBarData } from './utils/logs';
+import { getLogs, buildDonutData, buildBarData } from './utils/logs';
 
 function App() {
   const [builds, setBuilds] = useState([]);
@@ -18,7 +18,11 @@ function App() {
   const [filter, setFilter] = useState('ALL');
 
   useEffect(() => {
-    fetchLogs().then(setBuilds).catch(() => setBuilds([]));
+    try {
+      setBuilds(getLogs());
+    } catch (e) {
+      setBuilds([]);
+    }
   }, []);
 
   const selectedBuild = useMemo(() => builds.find(b => b.id === selectedId) || null, [builds, selectedId]);

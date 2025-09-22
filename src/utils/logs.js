@@ -1,10 +1,8 @@
 // Utilities for loading and transforming logs.json
+import externalLogs from './logs.json';
 
-export async function fetchLogs() {
-  const response = await fetch(process.env.PUBLIC_URL + '/logs.json');
-  if (!response.ok) throw new Error('Failed to load logs.json');
-  const data = await response.json();
-  return Array.isArray(data) ? data : [];
+export function getLogs() {
+  return Array.isArray(externalLogs) ? externalLogs : [];
 }
 
 export function getBuildLabel(build) {
@@ -105,12 +103,20 @@ export function buildDonutData(build) {
 }
 
 export function buildBarData(build) {
-  const TOTAL_TESTS = 49;
+  const TOTAL_TESTS = getTotalTests(build);
   const impacted = isAiBuild(build) ? countImpactedTests(build) : TOTAL_TESTS;
   return [
     { name: 'Total', count: TOTAL_TESTS },
     { name: 'Impacted', count: impacted },
   ];
+}
+
+export function getTotalTests(build) {
+  const fromBuild = toNumber(build?.total_tests);
+  if (fromBuild > 0) return fromBuild;
+  const fromTestTime = toNumber(build?.test_time?.total_tests);
+  if (fromTestTime > 0) return fromTestTime;
+  return 49;
 }
 
 
