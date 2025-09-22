@@ -1,5 +1,7 @@
 import React from 'react';
 import { Box, Paper, Typography } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChartLine } from '@fortawesome/free-solid-svg-icons';
 import { computeMeans, formatSeconds } from '../utils/logs';
 
 export default function SummaryView({ builds }) {
@@ -20,7 +22,34 @@ export default function SummaryView({ builds }) {
 
   return (
     <Box>
-      <Typography variant="h6" sx={{ mb: 2 }}>Overall Summary</Typography>
+      <Box
+        sx={{
+          display: 'block',
+          background: theme => (theme.palette.mode === 'light' ? '#fffdf6' : 'rgba(255,193,7,0.06)'),
+          border: '1px solid #e0e0e0',
+          borderLeft: '6px solid #ffcd41',
+          borderRadius: 1,
+          px: 1.5,
+          py: 1,
+          mb: 2
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <FontAwesomeIcon icon={faChartLine} />
+          <Typography
+            variant="h5"
+            sx={{
+              m: 0,
+              p: 0,
+              fontWeight: 600,
+              letterSpacing: 0.2,
+              color: '#000'
+            }}
+          >
+            Overall Summary
+          </Typography>
+        </Box>
+      </Box>
       <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 2 }}>
         {cards.map((c) => (
           <Paper

@@ -51,7 +51,7 @@ export default function ImpactedTests({ build }) {
               </Typography>
               <Chip size="small" color="primary" label={it.tests.length} sx={{ ml: 1.5 }} />
             </Stack>
-            <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mt: 1.25 }}>
+            <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mt: 1.25, mb: 1.25 }}>
               {it.tests.map((t, i) => (
                 <Chip key={i} size="small" color="primary" variant="outlined" label={t} />
               ))}

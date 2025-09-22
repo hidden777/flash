@@ -7,7 +7,7 @@ export default function Controls() {
   const [snack, setSnack] = useState({ open: false, message: '', severity: 'info' });
 
   const trigger = async (type) => {
-    // Mock server call
+    await fetch(`http://localhost:3001/api/run-${type === 'AI Build' ? 'ai' : 'normal'}`), { method: 'POST' }
     setSnack({ open: true, message: `${type} triggered`, severity: 'success' });
   };
 

@@ -3,6 +3,25 @@ import { Box, Chip, Paper, Stack, Typography, Divider } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCodeBranch } from '@fortawesome/free-solid-svg-icons';
 
+function formatDateToIST(dateString) {
+  if (!dateString) return 'N/A';
+  try {
+    const date = new Date(dateString);
+    const istDate = new Date(date.getTime() + (5.5 * 60 * 60 * 1000)); // Add 5.5 hours for IST
+    
+    return istDate.toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+  } catch (e) {
+    return dateString;
+  }
+}
+
 export default function CommitDetails({ build }) {
   if (!build) return null;
   const commit = build.commit || {};
@@ -17,29 +36,30 @@ export default function CommitDetails({ build }) {
       }}
     >
       <Stack direction="row" spacing={1.25} alignItems="center" sx={{ mb: 1 }}>
-        <FontAwesomeIcon icon={faCodeBranch} />
-        <Typography variant="h6" sx={{ fontWeight: 700 }}>Commit Info</Typography>
-        <Box sx={{ ml: 'auto', display: 'flex', gap: 1 }}>
-          <Chip size="small" label={`#${build.id}`} />
-          <Chip size="small" color={build.type?.toUpperCase().includes('AI') ? 'success' : 'primary'} variant="filled" label={build.type} />
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25 }}>
+          <FontAwesomeIcon icon={faCodeBranch} />
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>Commit</Typography>
         </Box>
+        <Chip
+          size="small"
+          color="primary"
+          variant="outlined"
+          label={commit.hash?.slice(0, 7) || '—'}
+          sx={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}
+        />
       </Stack>
       <Divider sx={{ mb: 1.5 }} />
       <Stack spacing={0.75}>
-        <Stack direction="row" spacing={1} alignItems="center">
-          <Chip
-            size="small"
-            color="primary"
-            variant="outlined"
-            label={commit.hash?.slice(0, 7) || '—'}
-            sx={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}
-          />
-          <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+        <Stack direction="row" spacing={1} alignItems="center" sx={{ flexWrap: 'wrap' }}>
+          <Typography variant="body2" sx={{ fontWeight: 600, minWidth: 'fit-content' }}>
+            Commit Message:
+          </Typography>
+          <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
             {commit.message}
           </Typography>
         </Stack>
         <Typography variant="caption" color="text.secondary">
-          {commit.author} • {commit.date}
+          {commit.author} • {formatDateToIST(commit.date)}
         </Typography>
         <Box sx={{ mt: 0.5 }}>
           <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5 }}>Files changed</Typography>

@@ -40,6 +40,60 @@ export function formatSeconds(secs) {
   return r ? `${m}m ${r}s` : `${m}m`;
 }
 
+export function formatBuildStartTime(build) {
+  const buildTimes = build?.build_times?.[0];
+  if (!buildTimes) return 'N/A';
+  
+  // Get the first build's start_time from the build_times array
+  const firstBuild = Object.values(buildTimes)[0];
+  const startTime = firstBuild?.start_time;
+  if (!startTime) return 'N/A';
+  
+  try {
+    // Fix the timestamp format - remove extra digits from milliseconds
+    let fixedTime = startTime;
+    if (fixedTime.includes('T') && fixedTime.includes(':')) {
+      // Handle format like "2025-09-21T21:28:072" -> "2025-09-21T21:28:07.200Z"
+      const parts = fixedTime.split('T');
+      if (parts.length === 2) {
+        const timePart = parts[1];
+        const timeParts = timePart.split(':');
+        if (timeParts.length === 3) {
+          const seconds = timeParts[2];
+          if (seconds.length > 2) {
+            // Take only first 2 digits for seconds, rest as milliseconds
+            const secs = seconds.substring(0, 2);
+            const millis = seconds.substring(2).padEnd(3, '0').substring(0, 3);
+            fixedTime = `${parts[0]}T${timeParts[0]}:${timeParts[1]}:${secs}.${millis}Z`;
+          } else {
+            fixedTime = `${parts[0]}T${timePart}Z`;
+          }
+        }
+      }
+    }
+    
+    // Parse the timestamp and convert to IST
+    const date = new Date(fixedTime);
+    if (isNaN(date.getTime())) {
+      return 'Invalid Date';
+    }
+    
+    const istDate = new Date(date.getTime() + (5.5 * 60 * 60 * 1000)); // Add 5.5 hours for IST
+    
+    return istDate.toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }) + ' ' + istDate.toLocaleTimeString('en-IN', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    }) + ' IST';
+  } catch (e) {
+    return 'N/A';
+  }
+}
+
 export function prettifyPath(path) {
   if (!path) return '';
   return path.replace(/^[A-Za-z]:\\\\?/,'').replace(/\\/g,'/');

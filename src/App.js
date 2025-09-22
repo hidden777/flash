@@ -4,6 +4,8 @@ import { Box, Grid, Paper } from '@mui/material';
 import HeaderBar from './components/HeaderBar';
 import Sidebar from './components/Sidebar';
 import CommitDetails from './components/CommitDetails';
+import BuildSummary from './components/BuildSummary';
+import TimeCards from './components/TimeCards';
 import DonutChart from './components/charts/DonutChart';
 import BarChartImpacted from './components/charts/BarChartImpacted';
 import ImpactedTests from './components/ImpactedTests';
@@ -42,7 +44,7 @@ function App() {
 
   return (
     <Box className="app-shell">
-      <HeaderBar selectedBuild={selectedBuild} />
+      <HeaderBar />
       <Box className="app-body">
         <Sidebar
           builds={builds}
@@ -58,17 +60,20 @@ function App() {
                 <SummaryView builds={filteredBuilds} />
               </Box>
               <Box sx={{ mt: 2 }}>
-                <BuildsTable builds={filteredBuilds} />
+                <BuildsTable builds={filteredBuilds} onSelectBuild={handleSelect} />
               </Box>
             </>
           )}
           {selectedBuild && (
             <>
+              <Box sx={{ mt: 1 }}>
+                <BuildSummary build={selectedBuild} />
+              </Box>
               <Box sx={{ mt: 2 }}>
                 <CommitDetails build={selectedBuild} />
               </Box>
-              <Grid container spacing={2} sx={{ mt: 1 }}>
-                <Grid item xs={12} md={6}>
+              <Box sx={{ display: 'flex', gap: 2, mt: 2, flexWrap: 'wrap' }}>
+                <Box sx={{ flex: 1, minWidth: 300 }}>
                   <Paper
                     variant="outlined"
                     sx={{
@@ -80,8 +85,8 @@ function App() {
                     <div style={{ fontWeight: 600, marginBottom: 8 }}>Time Breakdown (Build / Test / LLM)</div>
                     <DonutChart data={donutData} />
                   </Paper>
-                </Grid>
-                <Grid item xs={12} md={6}>
+                </Box>
+                <Box sx={{ flex: 1, minWidth: 300 }}>
                   <Paper
                     variant="outlined"
                     sx={{
@@ -93,8 +98,11 @@ function App() {
                     <div style={{ fontWeight: 600, marginBottom: 8 }}>Tests: Total vs Impacted</div>
                     <BarChartImpacted data={barData} />
                   </Paper>
-                </Grid>
-              </Grid>
+                </Box>
+                <Box sx={{ flex: 1, minWidth: 300 }}>
+                  <TimeCards build={selectedBuild} />
+                </Box>
+              </Box>
               <Box sx={{ mt: 2 }}>
                 <ImpactedTests build={selectedBuild} />
               </Box>

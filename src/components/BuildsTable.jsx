@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip } from '@mui/material';
 import { computeTotals, formatSeconds, chipColorForBuild } from '../utils/logs';
 
-export default function BuildsTable({ builds }) {
+export default function BuildsTable({ builds, onSelectBuild }) {
   return (
     <TableContainer
       component={Paper}
@@ -14,23 +14,28 @@ export default function BuildsTable({ builds }) {
     >
       <Table size="small" sx={{
         '& thead th': { fontWeight: 700, backgroundColor: 'rgba(0,0,0,0.04)' },
-        '& tbody tr:hover': { backgroundColor: 'action.hover' }
+        '& tbody tr:hover': { backgroundColor: 'action.hover', cursor: 'pointer' }
       }}>
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Type</TableCell>
-            <TableCell>Commit</TableCell>
-            <TableCell>Author</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Total</TableCell>
+            <TableCell sx={{ fontSize: '1rem', fontWeight: 800 }}>ID</TableCell>
+            <TableCell sx={{ fontSize: '1rem', fontWeight: 800 }}>Type</TableCell>
+            <TableCell sx={{ fontSize: '1rem', fontWeight: 800 }}>Commit Hash</TableCell>
+            <TableCell sx={{ fontSize: '1rem', fontWeight: 800 }}>Message</TableCell>
+            <TableCell sx={{ fontSize: '1rem', fontWeight: 800 }}>Author</TableCell>
+            <TableCell sx={{ fontSize: '1rem', fontWeight: 800 }}>Date</TableCell>
+            <TableCell sx={{ fontSize: '1rem', fontWeight: 800 }}>Total</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {builds.map(b => {
             const totals = computeTotals(b);
             return (
-              <TableRow key={b.id}>
+              <TableRow 
+                key={b.id} 
+                onClick={() => onSelectBuild && onSelectBuild(b.id)}
+                sx={{ cursor: 'pointer' }}
+              >
                 <TableCell>#{b.id}</TableCell>
                 <TableCell>
                   <Chip size="small" color={chipColorForBuild(b)} label={b.type} sx={{ fontWeight: 700 }} />
@@ -41,10 +46,10 @@ export default function BuildsTable({ builds }) {
                     variant="outlined"
                     color="primary"
                     label={b.commit?.hash?.slice(0,7)}
-                    sx={{ mr: 1, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}
+                    sx={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}
                   />
-                  {b.commit?.message}
                 </TableCell>
+                <TableCell>{b.commit?.message}</TableCell>
                 <TableCell>{b.commit?.author}</TableCell>
                 <TableCell>{b.commit?.date}</TableCell>
                 <TableCell>{formatSeconds(totals.totalSeconds)}</TableCell>

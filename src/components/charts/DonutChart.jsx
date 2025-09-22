@@ -10,7 +10,7 @@ export default function DonutChart({ data }) {
   }
   return (
     <div style={{ width: '100%', overflow: 'hidden' }}>
-      <PieChart width={480} height={260}>
+      <PieChart width={480} height={292}>
         <Pie data={data} dataKey="value" nameKey="name" innerRadius={60} outerRadius={100} paddingAngle={4}>
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

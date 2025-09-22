@@ -8,7 +8,7 @@ export default function BarChartImpacted({ data }) {
   }
   return (
     <div style={{ width: '100%', overflow: 'hidden' }}>
-      <BarChart width={480} height={260} data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+      <BarChart width={480} height={292} data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis allowDecimals={false} />
