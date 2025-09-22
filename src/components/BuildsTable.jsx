@@ -9,7 +9,7 @@ export default function BuildsTable({ builds, onSelectBuild }) {
       variant="outlined"
       sx={{
         borderLeft: theme => `4px solid ${theme.palette.warning.main}`,
-        background: theme => (theme.palette.mode === 'light' ? '#fffdf6' : 'rgba(255,193,7,0.06)')
+        background: '#fffdf6'
       }}
     >
       <Table size="small" sx={{

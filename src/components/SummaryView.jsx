@@ -25,7 +25,7 @@ export default function SummaryView({ builds }) {
       <Box
         sx={{
           display: 'block',
-          background: theme => (theme.palette.mode === 'light' ? '#fffdf6' : 'rgba(255,193,7,0.06)'),
+          background: '#fffdf6',
           border: '1px solid #e0e0e0',
           borderLeft: '6px solid #ffcd41',
           borderRadius: 1,
@@ -59,7 +59,7 @@ export default function SummaryView({ builds }) {
               p: 2.5,
               textAlign: 'center',
               borderLeft: theme => `4px solid ${theme.palette.warning.main}`,
-              background: theme => (theme.palette.mode === 'light' ? '#fffdf6' : 'rgba(255,193,7,0.06)'),
+              background: '#fffdf6',
               position: 'relative',
               overflow: 'hidden'
             }}

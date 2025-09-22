@@ -32,7 +32,7 @@ export default function CommitDetails({ build }) {
       sx={{
         p: 2,
         borderLeft: theme => `4px solid ${theme.palette.warning.main}`,
-        background: theme => (theme.palette.mode === 'light' ? '#fffdf6' : 'rgba(255,193,7,0.06)')
+        background: '#fffdf6'
       }}
     >
       <Stack direction="row" spacing={1.25} alignItems="center" sx={{ mb: 1 }}>

@@ -16,7 +16,7 @@ export default function ImpactedTests({ build }) {
       sx={{
         p: 2.5,
         borderLeft: theme => `4px solid ${theme.palette.warning.main}`,
-        background: theme => (theme.palette.mode === 'light' ? '#fffdf6' : 'rgba(255,193,7,0.06)')
+        background: '#fffdf6'
       }}
     >
       <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 1 }}>
@@ -31,7 +31,7 @@ export default function ImpactedTests({ build }) {
           <Paper
             key={it.id}
             variant="outlined"
-            sx={{ p: 1.75, borderRadius: 1.5, background: theme => (theme.palette.mode === 'light' ? '#fff' : 'rgba(255,255,255,0.02)') }}
+            sx={{ p: 1.75, borderRadius: 1.5, background: '#fffdf6' }}
           >
             <Stack direction="row" spacing={1.25} alignItems="center">
               <FontAwesomeIcon icon={faFileCode} style={{ color: '#1976d2' }} />

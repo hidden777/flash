@@ -33,7 +33,7 @@ export default function Controls({ onBuildStart, onBuildComplete }) {
       sx={{
         p: 1.5,
         borderLeft: theme => `4px solid ${theme.palette.warning.main}`,
-        background: theme => (theme.palette.mode === 'light' ? '#fffdf6' : 'rgba(255,193,7,0.06)')
+        background: '#fffdf6'
       }}
     >
       <Box sx={{ display: 'flex', gap: 1.25 }}>

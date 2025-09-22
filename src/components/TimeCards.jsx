@@ -23,7 +23,7 @@ export default function TimeCards({ build }) {
             p: 1.5,
             textAlign: 'center',
             borderLeft: `4px solid ${card.color}`,
-            background: theme => (theme.palette.mode === 'light' ? '#fffdf6' : 'rgba(255,193,7,0.06)'),
+            background: '#fffdf6',
             transition: 'transform 0.2s',
             '&:hover': { transform: 'translateY(-2px)' }
           }}

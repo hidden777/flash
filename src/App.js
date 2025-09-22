@@ -108,7 +108,7 @@ function App() {
                     sx={{
                       p: 2,
                       borderLeft: theme => `4px solid ${theme.palette.warning.main}`,
-                      background: theme => (theme.palette.mode === 'light' ? '#fffdf6' : 'rgba(255,193,7,0.06)')
+                      background: '#fffdf6'
                     }}
                   >
                     <div style={{ fontWeight: 600, marginBottom: 8 }}>Time Breakdown (Build / Test / LLM)</div>
@@ -121,7 +121,7 @@ function App() {
                     sx={{
                       p: 2,
                       borderLeft: theme => `4px solid ${theme.palette.warning.main}`,
-                      background: theme => (theme.palette.mode === 'light' ? '#fffdf6' : 'rgba(255,193,7,0.06)')
+                      background: '#fffdf6'
                     }}
                   >
                     <div style={{ fontWeight: 600, marginBottom: 8 }}>Tests: Total vs Impacted</div>
